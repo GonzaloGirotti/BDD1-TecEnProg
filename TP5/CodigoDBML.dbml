@@ -1,0 +1,39 @@
+Table Deportista {
+  id_deportista integer [primary key]
+  nombre_deportista varchar
+  pais_id integer [ref: > Pais.id_pais]
+}
+
+Table Pais {
+  id_pais integer [primary key]
+  nombre_pais varchar [unique]
+}
+
+Table Disciplina {
+  id_disciplina integer [primary key]
+  nombre_disciplina varchar
+}
+
+Table Asistente {
+  id_asistente integer [primary key]
+  nombre_asistente varchar
+}
+
+Table Olimpiadas {
+  id_olimpiada   integer [primary key]
+  anio_olimpiada integer [unique]
+  id_pais varchar [ref: > Pais.id_pais]
+}
+
+Table Participaciones {
+  participacion_id integer [primary key]
+  olimpiada_code integer [ref: > Olimpiadas.id_olimpiada]
+  deportista_code integer [ref: > Deportista.id_deportista]
+  asistente_code integer [ref: > Asistente.id_asistente]
+  disciplina_code integer [ref: > Disciplina.id_disciplina]
+
+  indexes {
+    (olimpiada_code, deportista_code) [unique]
+    (olimpiada_code, asistente_code) [unique]
+  }
+}
