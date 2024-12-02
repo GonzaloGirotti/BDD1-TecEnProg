@@ -1,0 +1,52 @@
+Table "Pacientes" {
+  "Paciente_ID" int [pk, not null, increment]
+  "Paciente_Nombre" varchar(40) [not null]
+  "Paciente_FechaNacimiento" date [not null]
+  "Paciente_Telefono" bigint(11) [not null]
+  "Paciente_Direccion" varchar(40) [not null]
+
+  Indexes {
+    Paciente_Telefono [unique]
+  }
+}
+
+Table "Doctores" {
+  "Doctor_ID" int [pk, not null, increment]
+  "Doctor_Nombre" varchar(40) [not null]
+  "Doctor_Telefono" bigint(11) [not null]
+  "Doctor_Direccion" varchar(40) [not null]
+  "Doctor_Especialidad" varchar(40) [not null]
+
+  Indexes {
+    (Doctor_Nombre, Doctor_Especialidad) [unique]
+    Doctor_Telefono [unique]
+  }
+}
+
+Table "Turnos_Fechas" {
+  "Turno_ID" int [pk, not null, increment]
+  "Turno_Fecha" date [not null]
+  "Turno_Hora" time [not null]
+
+  Indexes {
+    (Turno_Fecha, Turno_Hora) [unique]
+  }
+}
+
+Table "Turnos_Pacientes" {
+  "ID_Turno_Asignado" int [pk, not null, increment]
+  "Turno_ID" int [not null]
+  "Turno_Paciente_ID" int [not null]
+  "Turno_Doctor_ID" int [not null]
+
+  Indexes {
+    (Turno_ID, Turno_Paciente_ID) [unique]
+    (Turno_ID, Turno_Doctor_ID) [unique]
+  }
+}
+
+Ref:"Turnos_Fechas"."Turno_ID" < "Turnos_Pacientes"."Turno_ID" [update: cascade, delete: cascade]
+
+Ref:"Pacientes"."Paciente_ID" < "Turnos_Pacientes"."Turno_Paciente_ID" [delete: cascade]
+
+Ref:"Doctores"."Doctor_ID" < "Turnos_Pacientes"."Turno_Doctor_ID"

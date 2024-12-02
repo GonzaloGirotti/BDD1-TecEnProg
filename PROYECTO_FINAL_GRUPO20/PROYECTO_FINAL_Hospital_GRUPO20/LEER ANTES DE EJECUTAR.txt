@@ -1,0 +1,5 @@
+El archivo .py que debe ejecutarse para iniciar el programa es "Main.py".
+
+PASOS PARA EJECUTAR:
+1 - En la carpeta "Conexión_BD" buscar el archivo "conexion_db.py" y dentro completar las credenciales de su servidor de base de datos.
+2 - Ejecutar Main.py, el cual tiene una función que llama a los procedimientos para crear las tablas y luego inicia el CLI.

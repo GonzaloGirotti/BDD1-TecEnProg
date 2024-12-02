@@ -1,0 +1,378 @@
+CREATE TABLE Pacientes (
+    Paciente_ID int not null primary key auto_increment,
+    Paciente_Nombre varchar(40) not null,
+    Paciente_FechaNacimiento date not null,
+    Paciente_Telefono bigint(11) not null,
+    Paciente_Direccion varchar(40) not null,
+    UNIQUE(Paciente_Telefono)
+);
+CREATE TABLE Doctores (
+    Doctor_ID int not null primary key auto_increment,
+    Doctor_Nombre varchar(40) not null,
+    Doctor_Telefono bigint(11) not null,
+    Doctor_Direccion varchar(40) not null,
+    Doctor_Especialidad varchar(40) not null,
+    UNIQUE(Doctor_Nombre, Doctor_Especialidad),
+    UNIQUE(Doctor_Telefono)
+);
+CREATE TABLE Turnos_Fechas(
+    Turno_ID int not null primary key auto_increment,
+    Turno_Fecha date not null,
+    Turno_Hora time not null,
+    UNIQUE (Turno_Fecha, Turno_Hora)
+);
+CREATE TABLE Turnos_Pacientes(
+    ID_Turno_Asignado int not null primary key auto_increment,
+    Turno_ID int not null,
+    Turno_Paciente_ID int not null,
+    Turno_Doctor_ID int not null,
+    FOREIGN KEY (Turno_ID) REFERENCES Turnos_Fechas(Turno_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (Turno_Paciente_ID) REFERENCES Pacientes(Paciente_ID) ON DELETE CASCADE,
+    FOREIGN KEY (Turno_Doctor_ID) REFERENCES Doctores(Doctor_ID),
+    UNIQUE (Turno_ID, Turno_Paciente_ID),
+    UNIQUE (Turno_ID, Turno_Doctor_ID)
+);
+INSERT INTO Pacientes(
+        Paciente_Nombre,
+        Paciente_FechaNacimiento,
+        Paciente_Telefono,
+        Paciente_Direccion
+    )
+VALUES (
+        'Juan Perez',
+        '1990-01-01',
+        2910008886,
+        'Calle Falsa 123'
+    ),
+    (
+        'Maria Rodriguez',
+        '1991-02-02',
+        2910088765,
+        'Calle Falsa 456'
+    ),
+    (
+        'Pedro Gomez',
+        '1992-03-03',
+        2914470231,
+        'Calle Falsa 789'
+    ),
+    (
+        'Josefina Fernandez',
+        '1993-04-04',
+        2915532000,
+        'Calle Falsa 012'
+    ),
+    (
+        'Carlos Sanchez',
+        '1994-05-05',
+        2915554441,
+        'Calle Falsa 345'
+    ),
+    (
+        'Ana Lopez',
+        '1995-06-06',
+        2917745369,
+        'Calle Falsa 678'
+    ),
+    (
+        'Roberto Martinez',
+        '1996-07-07',
+        2918876651,
+        'Calle Falsa 901'
+    ),
+    (
+        'Susana Perez',
+        '1997-08-08',
+        2918886303,
+        'Calle Falsa 234'
+    ),
+    (
+        'Miguel Rodriguez',
+        '1998-09-09',
+        2918889991,
+        'Calle Falsa 567'
+    ),
+    (
+        'Laura Gomez',
+        '1999-10-10',
+        2919998876,
+        'Calle Falsa 890'
+    );
+INSERT INTO Doctores(
+        Doctor_Nombre,
+        Doctor_Telefono,
+        Doctor_Direccion,
+        Doctor_Especialidad
+    )
+VALUES (
+        'Dr. Juan Pablo Perez',
+        2910001154,
+        'Calle Falsa 222',
+        'Cardiologia'
+    ),
+    (
+        'Dra. Mariana Rodriguez',
+        2910023321,
+        'Calle Falsa 555',
+        'Clinica Medica'
+    ),
+    (
+        'Dr. Pedro Alberto Gomez',
+        2914556789,
+        'Calle Falsa 666',
+        'Dermatologia'
+    ),
+    (
+        'Dra. Josefa Fernandez',
+        2914568800,
+        'Calle Falsa 111',
+        'Endocrinologia'
+    ),
+    (
+        'Dr. Carlos Lopez',
+        2915578654,
+        'Calle Falsa 980',
+        'Gastroenterologia'
+    ),
+    (
+        'Dra. Ana Lisa Lopez',
+        2916541238,
+        'Calle Falsa 1454',
+        'Hematologia'
+    ),
+    (
+        'Dr. Roberto Gomez Bolaños',
+        2916543211,
+        'Calle Falsa 2956',
+        'Infectologia'
+    ),
+    (
+        'Dra. Susana Bonaqua',
+        2916547643,
+        'Calle Falsa 2211',
+        'Nefrologia'
+    ),
+    (
+        'Dr. Miguel Merentiel',
+        2916665555,
+        'Calle Falsa 1143',
+        'Neumonologia'
+    ),
+    (
+        'Dra. Laura Perez Joy',
+        2917774587,
+        'Calle Falsa 9908',
+        'Oftalmologia'
+    );
+INSERT INTO Turnos_Fechas(Turno_Fecha, Turno_Hora)
+VALUES ('2025-10-14', '08:00:00'),
+    ('2025-10-14', '09:00:00'),
+    ('2025-10-14', '10:00:00'),
+    ('2025-10-14', '11:00:00'),
+    ('2025-10-14', '12:00:00'),
+    ('2025-10-14', '13:00:00'),
+    ('2025-10-14', '14:00:00'),
+    ('2025-10-14', '15:00:00'),
+    ('2025-10-14', '16:00:00'),
+    ('2025-10-14', '17:00:00'),
+    ('2025-10-15', '08:00:00'),
+    ('2025-10-15', '09:00:00'),
+    ('2025-10-15', '10:00:00'),
+    ('2025-10-15', '11:00:00'),
+    ('2025-10-15', '12:00:00'),
+    ('2025-10-15', '13:00:00'),
+    ('2025-10-15', '14:00:00'),
+    ('2025-10-15', '15:00:00'),
+    ('2025-10-15', '16:00:00'),
+    ('2025-10-15', '17:00:00'),
+    ('2025-10-16', '08:00:00'),
+    ('2025-10-16', '09:00:00'),
+    ('2025-10-16', '10:00:00'),
+    ('2025-10-16', '11:00:00'),
+    ('2025-10-16', '12:00:00'),
+    ('2025-10-16', '13:00:00'),
+    ('2025-10-16', '14:00:00'),
+    ('2025-10-16', '15:00:00'),
+    ('2025-10-16', '16:00:00'),
+    ('2025-10-16', '17:00:00'),
+    ('2025-10-17', '08:00:00'),
+    ('2025-10-17', '09:00:00'),
+    ('2025-10-17', '10:00:00'),
+    ('2025-10-17', '11:00:00'),
+    ('2025-10-17', '12:00:00'),
+    ('2025-10-17', '13:00:00'),
+    ('2025-10-17', '14:00:00'),
+    ('2025-10-17', '15:00:00'),
+    ('2025-10-17', '16:00:00'),
+    ('2025-10-17', '17:00:00'),
+    ('2025-10-18', '08:00:00'),
+    ('2025-10-18', '09:00:00'),
+    ('2025-10-18', '10:00:00'),
+    ('2025-10-18', '11:00:00'),
+    ('2025-10-18', '12:00:00'),
+    ('2025-10-18', '13:00:00'),
+    ('2025-10-18', '14:00:00'),
+    ('2025-10-18', '15:00:00'),
+    ('2025-10-18', '16:00:00'),
+    ('2025-10-18', '17:00:00'),
+    ('2025-10-19', '08:00:00'),
+    ('2025-10-19', '09:00:00'),
+    ('2025-10-19', '10:00:00'),
+    ('2025-10-19', '11:00:00'),
+    ('2025-10-19', '12:00:00'),
+    ('2025-10-19', '13:00:00'),
+    ('2025-10-19', '14:00:00'),
+    ('2025-10-19', '15:00:00'),
+    ('2025-10-19', '16:00:00'),
+    ('2025-10-19', '17:00:00'),
+    ('2025-10-20', '08:00:00'),
+    ('2025-10-20', '09:00:00'),
+    ('2025-10-20', '10:00:00'),
+    ('2025-10-20', '11:00:00'),
+    ('2025-10-20', '12:00:00'),
+    ('2025-10-20', '13:00:00'),
+    ('2025-10-20', '14:00:00'),
+    ('2025-10-20', '15:00:00'),
+    ('2025-10-20', '16:00:00'),
+    ('2025-10-20', '17:00:00'),
+    ('2025-10-21', '08:00:00'),
+    ('2025-10-21', '09:00:00'),
+    ('2025-10-21', '10:00:00'),
+    ('2025-10-21', '11:00:00'),
+    ('2025-10-21', '12:00:00'),
+    ('2025-10-21', '13:00:00'),
+    ('2025-10-21', '14:00:00'),
+    ('2025-10-21', '15:00:00'),
+    ('2025-10-21', '16:00:00'),
+    ('2025-10-21', '17:00:00'),
+    ('2025-10-22', '08:00:00'),
+    ('2025-10-22', '09:00:00'),
+    ('2025-10-22', '10:00:00'),
+    ('2025-10-22', '11:00:00'),
+    ('2025-10-22', '12:00:00'),
+    ('2025-10-22', '13:00:00'),
+    ('2025-10-22', '14:00:00'),
+    ('2025-10-22', '15:00:00'),
+    ('2025-10-22', '16:00:00'),
+    ('2025-10-22', '17:00:00'),
+    ('2025-10-23', '08:00:00'),
+    ('2025-10-23', '09:00:00'),
+    ('2025-10-23', '10:00:00'),
+    ('2025-10-23', '11:00:00'),
+    ('2025-10-23', '12:00:00'),
+    ('2025-10-23', '13:00:00'),
+    ('2025-10-23', '14:00:00'),
+    ('2025-10-23', '15:00:00'),
+    ('2025-10-23', '16:00:00'),
+    ('2025-10-23', '17:00:00');
+INSERT INTO Turnos_Pacientes (Turno_ID, Turno_Paciente_ID, Turno_Doctor_ID)
+VALUES -- Turnos para Paciente 1
+    (1, 1, 1),
+    (11, 1, 2),
+    (21, 1, 3),
+    (31, 1, 4),
+    (41, 1, 5),
+    (51, 1, 6),
+    (61, 1, 7),
+    (71, 1, 8),
+    (81, 1, 9),
+    (91, 1, 10),
+    -- Turnos para Paciente 2
+    (2, 2, 1),
+    (12, 2, 2),
+    (22, 2, 3),
+    (32, 2, 4),
+    (42, 2, 5),
+    (52, 2, 6),
+    (62, 2, 7),
+    (72, 2, 8),
+    (82, 2, 9),
+    (92, 2, 10),
+    -- Turnos para Paciente 3
+    (3, 3, 1),
+    (13, 3, 2),
+    (23, 3, 3),
+    (33, 3, 4),
+    (43, 3, 5),
+    (53, 3, 6),
+    (63, 3, 7),
+    (73, 3, 8),
+    (83, 3, 9),
+    (93, 3, 10),
+    -- Turnos para Paciente 4
+    (4, 4, 1),
+    (14, 4, 2),
+    (24, 4, 3),
+    (34, 4, 4),
+    (44, 4, 5),
+    (54, 4, 6),
+    (64, 4, 7),
+    (74, 4, 8),
+    (84, 4, 9),
+    (94, 4, 10),
+    -- Turnos para Paciente 5
+    (5, 5, 1),
+    (15, 5, 2),
+    (25, 5, 3),
+    (35, 5, 4),
+    (45, 5, 5),
+    (55, 5, 6),
+    (65, 5, 7),
+    (75, 5, 8),
+    (85, 5, 9),
+    (95, 5, 10),
+    -- Turnos para Paciente 6
+    (6, 6, 1),
+    (16, 6, 2),
+    (26, 6, 3),
+    (36, 6, 4),
+    (46, 6, 5),
+    (56, 6, 6),
+    (66, 6, 7),
+    (76, 6, 8),
+    (86, 6, 9),
+    (96, 6, 10),
+    -- Turnos para Paciente 7
+    (7, 7, 1),
+    (17, 7, 2),
+    (27, 7, 3),
+    (37, 7, 4),
+    (47, 7, 5),
+    (57, 7, 6),
+    (67, 7, 7),
+    (77, 7, 8),
+    (87, 7, 9),
+    (97, 7, 10),
+    -- Turnos para Paciente 8
+    (8, 8, 1),
+    (18, 8, 2),
+    (28, 8, 3),
+    (38, 8, 4),
+    (48, 8, 5),
+    (58, 8, 6),
+    (68, 8, 7),
+    (78, 8, 8),
+    (88, 8, 9),
+    (98, 8, 10),
+    -- Turnos para Paciente 9
+    (9, 9, 1),
+    (19, 9, 2),
+    (29, 9, 3),
+    (39, 9, 4),
+    (49, 9, 5),
+    (59, 9, 6),
+    (69, 9, 7),
+    (79, 9, 8),
+    (89, 9, 9),
+    (99, 9, 10),
+    -- Turnos para Paciente 10
+    (10, 10, 1),
+    (20, 10, 2),
+    (30, 10, 3),
+    (40, 10, 4),
+    (50, 10, 5),
+    (60, 10, 6),
+    (70, 10, 7),
+    (80, 10, 8),
+    (90, 10, 9),
+    (100, 10, 10);
