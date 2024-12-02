@@ -129,8 +129,8 @@ def SeleccionMenuPacientes(opcion):
 
     elif opcion == 5:
         MetodosPacientes.USUARIOListarPacientes()
-        Utils.TiempoSleep("el menú principal")
-        MostrarMenuPrincipal()
+        Utils.TiempoSleep("el menú de pacientes")
+        Utils.VolverMenuPacientes()
     
     elif opcion == 6:
         MostrarMenuPrincipal()
@@ -204,12 +204,12 @@ def SeleccionMenuDoctores(opcion):
             Utils.PreguntaVolverAlMenuAnterior("MenuDoctores")
     elif opcion == 4:
         MetodosDoctores.USUARIOListarDoctores()
-        Utils.TiempoSleep("el menú principal")
-        MostrarMenuPrincipal()
+        Utils.TiempoSleep("el menú de doctores")
+        Utils.VolverMenuDoctores()
     elif opcion == 5:
         MetodosDoctores.USUARIODoctoresConMasTurnos()
-        Utils.TiempoSleep("el menú principal")
-        MostrarMenuPrincipal()
+        Utils.TiempoSleep("el menú de doctores")
+        Utils.VolverMenuDoctores()
     elif opcion == 6:
         MostrarMenuPrincipal()
 
